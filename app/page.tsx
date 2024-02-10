@@ -28,12 +28,12 @@ const frameMetadata = getFrameMetadata({
     // },
   ],
   image: {
-    src: `${NEXT_PUBLIC_URL}/park-3.png`,
+    src: `${NEXT_PUBLIC_URL}/alphaday.png`,
     aspectRatio: "1:1",
   },
-  input: {
-    text: "Tell me a boat story",
-  },
+  // input: {
+  //   text: "Tell me a boat story",
+  // },
   postUrl: `${NEXT_PUBLIC_URL}/api/frame?id=1`,
 });
 
