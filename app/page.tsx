@@ -28,7 +28,7 @@ const frameMetadata = getFrameMetadata({
     // },
   ],
   image: {
-    src: `${NEXT_PUBLIC_URL}/alphaday.png`,
+    src: `${NEXT_PUBLIC_URL}/images/alphaday.png`,
     aspectRatio: "1:1",
   },
   // input: {
