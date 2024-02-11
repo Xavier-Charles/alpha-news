@@ -26,11 +26,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
   if (message?.input) {
     text = message.input;
-  }
-
-  if (id === 10) {
-    return NextResponse.redirect("https://app.alphaday.com", { status: 302 });
-  }
+  }  
+  
 
   return new NextResponse(
     getFrameHtmlResponse({
@@ -43,7 +40,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
         src: `${process.env.NEXT_PUBLIC_BASE_URL}/api/gen-images?id=${id}`,
       },
       postUrl:
-        id === 10
+        idAsNumber === 10
           ? "https://app.alphaday.com/"
           : `${process.env.NEXT_PUBLIC_BASE_URL}/api/frame?id=${nextId}`,
     })
