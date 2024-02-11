@@ -1,6 +1,9 @@
+import { CONFIG } from "./config";
+
 interface CardProps {
   width?: number;
   height?: number;
+  id: number;
   title: string;
   sourceName: string;
   sourceIcon: string;
@@ -9,11 +12,11 @@ interface CardProps {
 export default function Card({
   width = 700,
   height = 700,
+  id,
   title,
   sourceName,
   sourceIcon,
 }: CardProps) {
-
   return (
     <div
       style={{
@@ -32,10 +35,16 @@ export default function Card({
       }}
     >
       <div
+        style={{ letterSpacing: "0.05px" }}
+        tw="w-full flex justify-start text-3xl px-10 text-[#ed7c0b]"
+      >
+        {id} /{CONFIG.POSTS.LIMIT}
+      </div>
+      <div
         style={{
           display: "flex",
           flexWrap: "wrap",
-          padding: "5px 40px",
+          padding: "40px 40px",
           width: "100%",
           textAlign: "start",
           backgroundImage:
@@ -55,7 +64,7 @@ export default function Card({
           display: "flex",
           width: "100%",
           textAlign: "start",
-          padding: "20px 40px",
+          padding: "0px 40px",
         }}
       >
         <span
@@ -63,7 +72,6 @@ export default function Card({
             backgroundImage:
               "linear-gradient(90deg, rgb(237, 124, 11), rgb(255, 77, 77))",
             // "linear-gradient(90deg, rgb(255, 77, 77), rgb(237, 124, 11))",
-
             backgroundClip: "text",
             fontSize: "30px",
             letterSpacing: "0.01em",
@@ -90,7 +98,7 @@ export default function Card({
       <img
         src={`${process.env.NEXT_PUBLIC_BASE_URL}/images/alphaday-news-logo.png`}
         alt="logo"
-        tw="w-20 h-20 self-start mx-10 mt-10"
+        tw="w-full h-full absolute opacity-5 self-start"
       />
     </div>
   );
