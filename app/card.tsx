@@ -63,7 +63,7 @@ export default function Card({
           style={{
             backgroundImage:
               "linear-gradient(90deg, rgb(237, 124, 11), rgb(255, 77, 77))",
-              // "linear-gradient(90deg, rgb(255, 77, 77), rgb(237, 124, 11))",
+            // "linear-gradient(90deg, rgb(255, 77, 77), rgb(237, 124, 11))",
 
             backgroundClip: "text",
             fontSize: "30px",
@@ -91,7 +91,7 @@ export default function Card({
       <img
         src={`${process.env.NEXT_PUBLIC_BASE_URL}/images/alphaday-news-logo.png`}
         alt="logo"
-        tw="w-20 h-20 absolute top-10 right-10"
+        tw="w-20 h-20 self-start mx-10 mt-10"
       />
     </div>
   );
