@@ -1,7 +1,38 @@
 import { ImageResponse, NextRequest } from "next/server";
-import { IMAGE_HEIGHT, IMAGE_WIDTH } from "@/app/config";
+import { CONFIG, IMAGE_HEIGHT, IMAGE_WIDTH } from "@/app/config";
 import Card from "@/app/card";
 import { mockData } from "../mock-data";
+
+type TNewsItem = {
+  id: number;
+  title: string;
+  url: string;
+  sourceIcon: string;
+  sourceSlug: string;
+  sourceName: string;
+  bookmarked: boolean;
+  author: string;
+  publishedAt: string;
+};
+
+type TResponse = {
+  results: TNewsItem[];
+};
+
+export const getNewsData = async () => {
+  // Fetch data from external API
+  const res = await fetch("https://api.zettaday.com/items/news/", {
+    method: "GET",
+    headers: {
+      Version: CONFIG.APP.VERSION,
+      "X-App-Id": CONFIG.APP.X_APP_ID,
+      "X-App-Secret": CONFIG.APP.X_APP_SECRET,
+    },
+  });
+  const newsResponse: TResponse = await res.json();
+  // Pass data to the page via props
+  return newsResponse;
+};
 
 const roboto = fetch(
   `${process.env.NEXT_PUBLIC_BASE_URL}/fonts/Roboto-Medium.ttf`
@@ -15,6 +46,8 @@ async function getResponse(req: NextRequest) {
     const idAsNumber = parseInt(id);
 
     const selectedData = mockData.results[idAsNumber];
+
+    // const data = await getNewsData();    
 
     // ?title=<title>
     // const hasTitle = searchParams.has("title");
