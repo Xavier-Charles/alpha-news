@@ -1,10 +1,15 @@
 import { FrameRequest, getFrameMessage, getFrameHtmlResponse } from '@coinbase/onchainkit';
 import { NextRequest, NextResponse } from 'next/server';
-import { NEXT_PUBLIC_URL } from '../../config';
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
   let accountAddress: string | undefined = '';
   let text: string | undefined = '';
+
+  const searchParams = req.nextUrl.searchParams;
+  const id: any = searchParams.get('id');
+  const idAsNumber = parseInt(id);
+
+  const nextId = idAsNumber + 1;
 
   const body: FrameRequest = await req.json();
   const { isValid, message } = await getFrameMessage(body, { neynarApiKey: 'NEYNAR_ONCHAIN_KIT' });
@@ -17,25 +22,21 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     text = message.input;
   }
 
-  if (message?.button === 3) {
-    return NextResponse.redirect(
-      'https://www.google.com/search?q=cute+dog+pictures&tbm=isch&source=lnms',
-      { status: 302 },
-    );
+  if (id === 10) {
+    return NextResponse.redirect("https://app.alphaday.com", { status: 302 });
   }
 
   return new NextResponse(
     getFrameHtmlResponse({
       buttons: [
         {
-          // label: `Story: ${text} 🌲`,
-          label: `Next Button`,
+          label: id=== 10? `More news at Alphaday.com`: `Next`,
         },
       ],
       image: {
-        src: `${NEXT_PUBLIC_URL}/images/okay.jpg`,
+        src: `${process.env.NEXT_PUBLIC_BASE_URL}/api/gen-images?id=${id}`,
       },
-      postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
+      postUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/frame?id=${nextId}`,
     })
   );
 }

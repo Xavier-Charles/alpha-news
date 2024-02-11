@@ -1,21 +1,10 @@
 import { getFrameMetadata } from "@coinbase/onchainkit";
 import type { Metadata } from "next";
-import { NEXT_PUBLIC_URL } from "./config";
-
-// const frameMetadata: Metadata = getFrameMetadata({
-//   buttons: [
-//     {
-//       label: "See what's happening",
-//     },
-//   ],
-//   image: `${process.env.NEXT_PUBLIC_GATEWAY_URL}/ipfs/Qme4FXhoxHHfyzTfRxSpASbMF8kajLEPkRQWhwWu9pkUjm/0.png`,
-//   post_url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/frame?id=1`,
-// });
 
 const frameMetadata = getFrameMetadata({
   buttons: [
     {
-      label: "See what's happening in crypto!",
+      label: "See what's happening today in crypto!",
     },
     // {
     //   action: "link",
@@ -28,13 +17,13 @@ const frameMetadata = getFrameMetadata({
     // },
   ],
   image: {
-    src: `${NEXT_PUBLIC_URL}/images/alphaday.png`,
+    src: `${process.env.NEXT_PUBLIC_BASE_URL}/images/alphaday-news.png`,
     aspectRatio: "1:1",
   },
   // input: {
   //   text: "Tell me a boat story",
   // },
-  postUrl: `${NEXT_PUBLIC_URL}/api/frame?id=1`,
+  postUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/frame?id=1`,
 });
 
 export const metadata: Metadata = {
@@ -55,7 +44,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      <h1 className="text-blue100">Alpha News</h1>
+      <h1 className="text-violet-300">Alpha News</h1>
     </>
   );
 }
