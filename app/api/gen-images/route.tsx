@@ -19,7 +19,7 @@ type TResponse = {
   results: TNewsItem[];
 };
 
-export const getNewsData = async () => {
+const getNewsData = async () => {
   // Fetch data from external API
   const res = await fetch("https://api.zettaday.com/items/news/", {
     method: "GET",
