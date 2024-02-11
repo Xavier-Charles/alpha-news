@@ -98,7 +98,7 @@ export default function Card({
       <img
         src={`${process.env.NEXT_PUBLIC_BASE_URL}/images/alphaday-news-logo.png`}
         alt="logo"
-        tw="w-full h-full absolute opacity-5 self-start"
+        tw="w-full h-full absolute opacity-10 self-start"
       />
     </div>
   );
