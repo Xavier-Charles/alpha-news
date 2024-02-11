@@ -26,14 +26,14 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
   if (message?.input) {
     text = message.input;
-  }  
-  
+  }
 
   return new NextResponse(
     getFrameHtmlResponse({
       buttons: [
         {
-          label: id === 10 ? `More news at Alphaday.com` : `Next`,
+          label: idAsNumber === 10 ? `More news at Alphaday.com` : `Next`,
+          ...(idAsNumber === 10 ? { action: "post_redirect" } : {}),
         },
       ],
       image: {
