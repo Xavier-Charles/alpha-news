@@ -13,7 +13,6 @@ export default function Card({
   sourceName,
   sourceIcon,
 }: CardProps) {
-  console.log("title", title, sourceName, sourceIcon);
 
   return (
     <div
