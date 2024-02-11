@@ -1,15 +1,13 @@
-import satori from "satori";
 import { ImageResponse, NextRequest } from "next/server";
 import { IMAGE_HEIGHT, IMAGE_WIDTH } from "@/app/config";
 import Card from "@/app/card";
-import { svgToPngURL } from "@/app/svgUtils";
 import { mockData } from "../mock-data";
 
 const roboto = fetch(
   `${process.env.NEXT_PUBLIC_BASE_URL}/fonts/Roboto-Medium.ttf`
 ).then((res) => res.arrayBuffer());
 
-export async function getResponse(req: NextRequest) {
+async function getResponse(req: NextRequest) {
   try {
     //  get searchParams
     const searchParams = req.nextUrl.searchParams;
