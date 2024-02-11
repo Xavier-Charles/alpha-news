@@ -72,6 +72,7 @@ async function getResponse(req: NextRequest) {
     return new ImageResponse(
       (
         <Card
+          id={idAsNumber}
           title={selectedData.title}
           sourceName={selectedData.source.name}
           sourceIcon={selectedData.source.icon}

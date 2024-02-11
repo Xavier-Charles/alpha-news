@@ -1,3 +1,4 @@
+import { CONFIG } from "@/app/config";
 import {
   FrameRequest,
   getFrameMessage,
@@ -32,15 +33,15 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     getFrameHtmlResponse({
       buttons: [
         {
-          label: idAsNumber === 10 ? `More news at Alphaday.com` : `Next`,
-          ...(idAsNumber === 10 ? { action: "post_redirect" } : {}),
+          label: idAsNumber === CONFIG.POSTS.LIMIT ? `More news at Alphaday.com` : `Next`,
+          ...(idAsNumber === CONFIG.POSTS.LIMIT ? { action: "post_redirect" } : {}),
         },
       ],
       image: {
         src: `${process.env.NEXT_PUBLIC_BASE_URL}/api/gen-images?id=${id}`,
       },
       postUrl:
-        idAsNumber === 10
+        idAsNumber === CONFIG.POSTS.LIMIT
           ? "https://app.alphaday.com/"
           : `${process.env.NEXT_PUBLIC_BASE_URL}/api/frame?id=${nextId}`,
     })
