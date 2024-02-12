@@ -33,8 +33,13 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     getFrameHtmlResponse({
       buttons: [
         {
-          label: idAsNumber === CONFIG.POSTS.LIMIT ? `More news at Alphaday.com` : `Next`,
-          ...(idAsNumber === CONFIG.POSTS.LIMIT ? { action: "post_redirect" } : {}),
+          label:
+            idAsNumber === CONFIG.POSTS.LIMIT
+              ? `More news at Alphaday.com`
+              : `Next`,
+          ...(idAsNumber === CONFIG.POSTS.LIMIT
+            ? { action: "post_redirect" }
+            : {}),
         },
       ],
       image: {
@@ -42,7 +47,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
       },
       postUrl:
         idAsNumber === CONFIG.POSTS.LIMIT
-          ? "https://app.alphaday.com/"
+          ? `${process.env.NEXT_PUBLIC_BASE_URL}/api/end`
           : `${process.env.NEXT_PUBLIC_BASE_URL}/api/frame?id=${nextId}`,
     })
   );
