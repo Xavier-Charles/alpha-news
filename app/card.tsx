@@ -15,7 +15,6 @@ export default function Card({
   id,
   title,
   sourceName,
-  sourceIcon,
 }: CardProps) {
   return (
     <div
@@ -38,7 +37,7 @@ export default function Card({
         style={{ letterSpacing: "0.05px" }}
         tw="w-full flex justify-start text-3xl px-10 text-[#ed7c0b]"
       >
-        {id} /{CONFIG.POSTS.LIMIT}
+        <span tw="mr-0.5">{id}</span>/{CONFIG.POSTS.LIMIT}
       </div>
       <div
         style={{
