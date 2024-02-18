@@ -32,15 +32,27 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   return new NextResponse(
     getFrameHtmlResponse({
       buttons: [
+        // @ts-ignore
+        isNaN(idAsNumber)
+          ? {
+              action: "link",
+              label: "Read source",
+              target: "https://www.google.com",
+            }
+          : {},
         {
           label:
-            idAsNumber === CONFIG.POSTS.LIMIT
-              ? `More news at Alphaday.com`
-              : `Next`,
+            idAsNumber === CONFIG.POSTS.LIMIT ? `More at Alphaday.com` : `Next`,
           ...(idAsNumber === CONFIG.POSTS.LIMIT
             ? { action: "post_redirect" }
             : {}),
         },
+        // @ts-ignore
+        idAsNumber !== CONFIG.POSTS.LIMIT
+          ? {
+              label: "Next",
+            }
+          : {},
       ],
       image: {
         src: `${process.env.NEXT_PUBLIC_BASE_URL}/api/gen-images?id=${id}`,
