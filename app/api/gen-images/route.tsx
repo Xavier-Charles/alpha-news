@@ -1,27 +1,11 @@
 import { ImageResponse, NextRequest } from "next/server";
 import { CONFIG, IMAGE_HEIGHT, IMAGE_WIDTH } from "@/app/config";
 import Card from "@/app/card";
+import fsPromises from "fs/promises";
+import path from "path";
+import { TNewsResponse } from "../types";
 
-type TNewsItem = {
-  id: number;
-  title: string;
-  url: string;
-  sourceIcon: string;
-  sourceSlug: string;
-  sourceName: string;
-  source: {
-    name: string;
-    icon: string;
-    slug: string;
-  };
-  bookmarked: boolean;
-  author: string;
-  publishedAt: string;
-};
-
-type TResponse = {
-  results: TNewsItem[];
-};
+const dataFilePath = path.join(process.cwd(), CONFIG.DATA.NEWS_DB_PATH);
 
 const getNewsData = async () => {
   // Fetch data from external API
@@ -34,7 +18,15 @@ const getNewsData = async () => {
     },
     next: { revalidate: 300 },
   });
-  const newsResponse: TResponse = await res.json();
+
+  const newsResponse: TNewsResponse = await res.json();
+
+  // Convert the object to a JSON string
+  const newsData = JSON.stringify(newsResponse);
+
+  // Write the updated data to the JSON file
+  await fsPromises.writeFile(dataFilePath, newsData);
+
   // Pass data to the page via props
   return newsResponse;
 };
@@ -53,8 +45,6 @@ async function getResponse(req: NextRequest) {
     const idAsNumber = parseInt(id);
 
     const selectedData = revalidatedData.results[idAsNumber];
-
-    // console.log("selectedData", selectedData, idAsNumber);
 
     return new ImageResponse(
       (
