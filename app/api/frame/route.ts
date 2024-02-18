@@ -6,8 +6,16 @@ import {
   FrameButtonMetadata,
 } from "@coinbase/onchainkit";
 import { NextRequest, NextResponse } from "next/server";
+import path from "path";
+import fsPromises from "fs/promises";
+import { TNewsResponse } from "../types";
 
-async function getResponse(req: NextRequest): Promise<NextResponse> {
+const dataFilePath = path.join(process.cwd(), CONFIG.DATA.NEWS_DB_PATH);
+
+async function getResponse(
+  req: NextRequest,
+  objectData: TNewsResponse | undefined
+): Promise<NextResponse> {
   let accountAddress: string | undefined = "";
   let text: string | undefined = "";
 
@@ -32,11 +40,6 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
   const buttons: [FrameButtonMetadata, ...FrameButtonMetadata[]] | undefined = [
     {
-      action: "link",
-      label: "Read source",
-      target: "https://www.google.com",
-    },
-    {
       label: "More at Alphaday.com",
       action: "post_redirect",
     },
@@ -49,12 +52,20 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     // },
   ];
 
-  if (    idAsNumber !== CONFIG.POSTS.LIMIT) {
+  if (objectData) {
+    const selectedData = objectData.results[idAsNumber];
+    buttons.unshift({
+      action: "link",
+      label: "Read source",
+      target: selectedData.url,
+    });
+  }
+
+  if (idAsNumber !== CONFIG.POSTS.LIMIT) {
     buttons.push({
       label: "Next",
     });
   }
-
 
   return new NextResponse(
     getFrameHtmlResponse({
@@ -71,7 +82,10 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 }
 
 export async function POST(req: NextRequest): Promise<Response> {
-  return getResponse(req);
+  // Read the existing data from the JSON file
+  const jsonData = await fsPromises.readFile(dataFilePath);
+  const objectData = JSON.parse(jsonData.toString()) as TNewsResponse | undefined;
+  return getResponse(req, objectData);
 }
 
 export const dynamic = "force-dynamic";
