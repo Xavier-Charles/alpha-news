@@ -43,7 +43,7 @@ export default function Card({
         style={{
           display: "flex",
           flexWrap: "wrap",
-          padding: "40px 40px",
+          padding: "28px 40px 40px",
           width: "100%",
           textAlign: "start",
           backgroundImage:
@@ -63,7 +63,8 @@ export default function Card({
           display: "flex",
           width: "100%",
           textAlign: "start",
-          padding: "0px 40px",
+          padding: "0px 20px 0 40px",
+          justifyContent: "space-between",
         }}
       >
         <span
@@ -75,16 +76,16 @@ export default function Card({
             fontSize: "30px",
             letterSpacing: "0.01em",
           }}
-          tw="[-webkit-background-clip:text] text-transparent mt-6 whitespace-nowrap"
+          tw="[-webkit-background-clip:text] text-transparent mt-6 whitespace-nowrap self-start"
         >
           Source: {sourceName}
         </span>
+        <img
+          src={`${process.env.NEXT_PUBLIC_BASE_URL}/images/alphaday-news-logo.png`}
+          alt="logo"
+          tw="w-20 h-20 self-start mx-10 p-2"
+        />
       </div>
-      <img
-        src={`${process.env.NEXT_PUBLIC_BASE_URL}/images/alphaday-news-logo.png`}
-        alt="logo"
-        tw="w-20 h-20 self-start mx-10 mt-10"
-      />
     </div>
   );
 }
