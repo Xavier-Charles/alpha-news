@@ -81,20 +81,6 @@ export default function Card({
           Source: {sourceName}
         </span>
       </div>
-      {/* <div
-        style={{
-          padding: "5px 40px",
-          width: "auto",
-          textAlign: "center",
-          backgroundImage:
-              "linear-gradient(90deg, rgb(0, 124, 240), rgb(0, 223, 216))",
-          backgroundClip: "text",
-          color: "transparent",
-        }}
-        className="[-webkit-background-clip:text]"
-      >
-        from your Browser
-      </div> */}
       <img
         src={`${process.env.NEXT_PUBLIC_BASE_URL}/images/alphaday-news-logo.png`}
         alt="logo"
