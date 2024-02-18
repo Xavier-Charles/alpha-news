@@ -54,7 +54,7 @@ async function getResponse(req: NextRequest) {
 
     const selectedData = revalidatedData.results[idAsNumber];
 
-    console.log("selectedData", selectedData, idAsNumber);
+    // console.log("selectedData", selectedData, idAsNumber);
 
     return new ImageResponse(
       (

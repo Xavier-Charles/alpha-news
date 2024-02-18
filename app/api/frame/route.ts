@@ -3,6 +3,7 @@ import {
   FrameRequest,
   getFrameMessage,
   getFrameHtmlResponse,
+  FrameButtonMetadata,
 } from "@coinbase/onchainkit";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -29,31 +30,35 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     text = message.input;
   }
 
+  const buttons: [FrameButtonMetadata, ...FrameButtonMetadata[]] | undefined = [
+    {
+      action: "link",
+      label: "Read source",
+      target: "https://www.google.com",
+    },
+    {
+      label: "More at Alphaday.com",
+      action: "post_redirect",
+    },
+    // {
+    //   label:
+    //     idAsNumber === CONFIG.POSTS.LIMIT ? `More at Alphaday.com` : `Next`,
+    //   ...(idAsNumber === CONFIG.POSTS.LIMIT
+    //     ? { action: "post_redirect" }
+    //     : {}),
+    // },
+  ];
+
+  if (    idAsNumber !== CONFIG.POSTS.LIMIT) {
+    buttons.push({
+      label: "Next",
+    });
+  }
+
+
   return new NextResponse(
     getFrameHtmlResponse({
-      buttons: [
-        // @ts-ignore
-        isNaN(idAsNumber)
-          ? {
-              action: "link",
-              label: "Read source",
-              target: "https://www.google.com",
-            }
-          : {},
-        {
-          label:
-            idAsNumber === CONFIG.POSTS.LIMIT ? `More at Alphaday.com` : `Next`,
-          ...(idAsNumber === CONFIG.POSTS.LIMIT
-            ? { action: "post_redirect" }
-            : {}),
-        },
-        // @ts-ignore
-        idAsNumber !== CONFIG.POSTS.LIMIT
-          ? {
-              label: "Next",
-            }
-          : {},
-      ],
+      buttons,
       image: {
         src: `${process.env.NEXT_PUBLIC_BASE_URL}/api/gen-images?id=${id}`,
       },
