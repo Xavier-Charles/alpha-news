@@ -6,7 +6,7 @@ export const CONFIG = {
     LIMIT: 10,
   },
   DATA: {
-    NEWS_DB_PATH: "./app/api/data/news.json",
+    NEWS_DB_PATH: "/app/data/news.json",
   },
   APP: {
     ALPHADAY_API: process.env.NEXT_ALPHADAY_API || "",
