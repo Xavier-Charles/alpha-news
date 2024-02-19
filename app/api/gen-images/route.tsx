@@ -10,9 +10,7 @@ const roboto = fetch(
 async function getResponse(req: NextRequest) {
   try {
     const revalidatedData = await getNewsData();
-
-    console.log("revalidatedData", revalidatedData.results[1].title);
-
+  
     //  get searchParams
     const searchParams = req.nextUrl.searchParams;
     const id: any = searchParams.get("id");
@@ -25,10 +23,7 @@ async function getResponse(req: NextRequest) {
 
     if (!selectedData) {
       selectedData = await getNewsItem(newsIdAsNumber);
-    }
-    
-    console.log("selectedData",selectedData, "newsIdAsNumber", newsIdAsNumber);
-    
+    }    
 
     return new ImageResponse(
       (

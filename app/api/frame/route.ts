@@ -15,12 +15,7 @@ async function getResponse(
   const id: any = searchParams.get("id");
   const idAsNumber = parseInt(id);
 
-  console.log("revalidatedData", newsData?.[1].title);
-
-  const selectedData = newsData?.[idAsNumber];
-
-  console.log("selectedData id ==>", selectedData?.id);
-  
+  const selectedData = newsData?.[idAsNumber];  
 
   const nextId = idAsNumber + 1;
 

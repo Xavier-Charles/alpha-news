@@ -33,8 +33,6 @@ export const computeDuration = (date: string | Date): string => {
 };
 
 const News: FC<{ news: TNewsItem[] }> = ({ news }) => {
-  console.log(news);
-
   return (
     <div className="flex items-center flex-col w-full">
       <ul
