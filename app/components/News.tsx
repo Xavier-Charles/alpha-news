@@ -74,7 +74,7 @@ const News: FC<{ news: TNewsItem[] }> = ({ news }) => {
         <Link
           href={CONFIG.ALPHADAY}
           type="submit"
-          className="flex w-full justify-center rounded-md bg-white/55 hover:bg-[#faa202]/70 shadow-lg bg-clip-padding borde px-12 py-3 text-sm sm:text-base font-semibold leading-6 text-[#121212] backdrop-blur-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-none cursor-pointer"
+          className="flex w-full justify-center rounded-md bg-white/55 hover:bg-[#faa202]/70 shadow-lg bg-clip-padding px-12 py-3 text-sm sm:text-base font-semibold leading-6 text-[#121212] backdrop-blur-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-none cursor-pointer"
         >
           News and more at Alphaday.com
         </Link>
