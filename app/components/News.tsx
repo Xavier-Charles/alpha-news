@@ -53,7 +53,7 @@ const News: FC<{ news: TNewsItem[] }> = ({ news }) => {
                 alt=""
               />
               <div className="min-w-0 flex-auto">
-                <p className="text-sm font-semibold leading-6 text-white">
+                <p className="sm:text-base text-sm sm:font-normal font-semibold  leading-6 text-white">
                   {person.title}
                 </p>
                 <p className="mt-1 truncate text-xs leading-5 text-gray-400">
@@ -64,7 +64,7 @@ const News: FC<{ news: TNewsItem[] }> = ({ news }) => {
             <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
               <p className="text-sm leading-6 text-white h-4"></p>
               <p className="mt-1 text-xs leading-5 text-gray-400">
-                {computeDuration(person.publishedAt)}
+                {computeDuration(person.published_at)}
               </p>
             </div>
           </Link>
@@ -74,9 +74,9 @@ const News: FC<{ news: TNewsItem[] }> = ({ news }) => {
         <Link
           href={CONFIG.ALPHADAY}
           type="submit"
-          className="flex w-full justify-center rounded-md bg-white/40 hover:bg-white/60 shadow-lg bg-clip-padding borde px-10 py-2 text-sm font-semibold leading-6 text-[#121212] backdrop-blur-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-none"
+          className="flex w-full justify-center rounded-md bg-white/55 hover:bg-[#faa202]/70 shadow-lg bg-clip-padding borde px-12 py-3 text-sm sm:text-base font-semibold leading-6 text-[#121212] backdrop-blur-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-none cursor-pointer"
         >
-          More on Alphaday.com
+          News and more at Alphaday.com
         </Link>
       </div>
     </div>

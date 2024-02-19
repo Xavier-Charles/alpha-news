@@ -12,7 +12,7 @@ export type TNewsItem = {
   };
   bookmarked: boolean;
   author: string;
-  publishedAt: string;
+  published_at: string;
 };
 
 export type TNewsResponse = {
