@@ -8,6 +8,7 @@ export const CONFIG = {
   DATA: {
     NEWS_DB_PATH: "/app/data/news.json",
   },
+  ALPHADAY: "https://app.alphaday.com",
   APP: {
     ALPHADAY_API: process.env.NEXT_ALPHADAY_API || "",
     VERSION: process.env.NEXT_VERSION || "",

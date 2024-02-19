@@ -25,8 +25,9 @@ async function getResponse(
 
   const buttons: [FrameButtonMetadata, ...FrameButtonMetadata[]] | undefined = [
     {
-      label: "More at Alphaday.com",
-      action: "post_redirect",
+      action: "link",
+      label: "Alphaday.com",
+      target: CONFIG.ALPHADAY,
     },
     // {
     //   label:
