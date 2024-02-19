@@ -10,8 +10,8 @@ interface CardProps {
 }
 
 export default function Card({
-  width = 700,
-  height = 700,
+  width = 800,
+  height = 800,
   id,
   title,
   sourceName,
@@ -34,10 +34,10 @@ export default function Card({
       }}
     >
       <div
-        style={{ letterSpacing: "0.05px" }}
-        tw="w-full flex justify-start text-3xl px-10 text-[#ed7c0b]"
+        style={{ letterSpacing: "0.05px", fontWeight: 700}}
+        tw="w-full flex font-black justify-start text-3xl px-10 text-[#ed7c0b]"
       >
-        <span tw="mr-0.5">{id}</span>/{CONFIG.POSTS.LIMIT}
+        <span tw="mr-0.5 font-black">{id}</span>/{CONFIG.POSTS.LIMIT}
       </div>
       <div
         style={{
