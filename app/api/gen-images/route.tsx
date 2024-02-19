@@ -1,35 +1,7 @@
 import { ImageResponse, NextRequest } from "next/server";
-import { CONFIG, IMAGE_HEIGHT, IMAGE_WIDTH } from "@/app/config";
+import { IMAGE_HEIGHT, IMAGE_WIDTH } from "@/app/config";
 import Card from "@/app/card";
-import fsPromises from "fs/promises";
-import path from "path";
-import { TNewsResponse } from "../types";
-
-const dataFilePath = path.join(process.cwd(), CONFIG.DATA.NEWS_DB_PATH);
-
-const getNewsData = async () => {
-  // Fetch data from external API
-  const res = await fetch(`${CONFIG.APP.ALPHADAY_API}/items/news/`, {
-    method: "GET",
-    headers: {
-      Version: CONFIG.APP.VERSION,
-      "X-App-Id": CONFIG.APP.X_APP_ID,
-      "X-App-Secret": CONFIG.APP.X_APP_SECRET,
-    },
-    next: { revalidate: 300 },
-  });
-
-  const newsResponse: TNewsResponse = await res.json();
-
-  // Convert the object to a JSON string
-  const newsData = JSON.stringify(newsResponse);
-
-  // Write the updated data to the JSON file
-  await fsPromises.writeFile(dataFilePath, newsData);
-
-  // Pass data to the page via props
-  return newsResponse;
-};
+import { getNewsData } from "../utils/getNews";
 
 const roboto = fetch(
   `${process.env.NEXT_PUBLIC_BASE_URL}/fonts/Roboto-Medium.ttf`
