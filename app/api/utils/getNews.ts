@@ -7,10 +7,12 @@ import getConfig from "next/config";
 const { serverRuntimeConfig } = getConfig();
 
 
-export const dataFilePath = path.join(
-  serverRuntimeConfig.PROJECT_ROOT,
-  CONFIG.DATA.NEWS_DB_PATH
-);
+// export const dataFilePath = path.join(
+//   serverRuntimeConfig.PROJECT_ROOT,
+//   CONFIG.DATA.NEWS_DB_PATH
+// );
+
+export const dataFilePath = path.resolve("./app/data/news.json");
 
 export const getNewsData = async () => {
   // Fetch data from external API
