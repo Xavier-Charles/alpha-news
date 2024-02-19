@@ -55,7 +55,7 @@ async function getResponse(
     getFrameHtmlResponse({
       buttons,
       image: {
-        src: `${process.env.NEXT_PUBLIC_BASE_URL}/api/gen-images?id=${id}`,
+        src: `${process.env.NEXT_PUBLIC_BASE_URL}/api/gen-images?id=${id}&hash=${selectedData?.id}`,
       },
       postUrl:
         idAsNumber === CONFIG.POSTS.LIMIT
