@@ -1,10 +1,11 @@
 import { CONFIG } from "@/app/config";
 import { TNewsResponse } from "../types";
-import fsPromises from "fs/promises";
+// import fsPromises from "fs/promises";
 import path from "path";
-import getConfig from "next/config";
+// import jsCookie from "js-cookie";
+// import jsHttpCookie from "cookie";
 
-const { serverRuntimeConfig } = getConfig();
+// const { serverRuntimeConfig } = getConfig();
 
 
 // export const dataFilePath = path.join(
@@ -12,7 +13,7 @@ const { serverRuntimeConfig } = getConfig();
 //   CONFIG.DATA.NEWS_DB_PATH
 // );
 
-export const dataFilePath = path.resolve("./app/data/news.json");
+// export const dataFilePath = path.resolve("./app/data/news.json");
 
 export const getNewsData = async () => {
   // Fetch data from external API
@@ -23,27 +24,31 @@ export const getNewsData = async () => {
       "X-App-Id": CONFIG.APP.X_APP_ID,
       "X-App-Secret": CONFIG.APP.X_APP_SECRET,
     },
-    next: { revalidate: 300 },
+    next: { revalidate: 300, tags: ["news-img", "news-text"]},
   });
 
   const newsResponse: TNewsResponse = await res.json();
 
-  // Convert the object to a JSON string
-  const newsData = JSON.stringify(newsResponse);
+  //  jsCookie.set("news", JSON.stringify(newsResponse))
 
-  // Write the updated data to the JSON file
-  await fsPromises.writeFile(dataFilePath, newsData);
+  // // Convert the object to a JSON string
+  // const newsData = JSON.stringify(newsResponse);
+
+  // // Write the updated data to the JSON file
+  // await fsPromises.writeFile(dataFilePath, newsData);
 
   // Pass data to the page via props
   return newsResponse;
 };
 
-export const asyncReadNewsData = async () => {
-  try {
-    const jsonData = await fsPromises.readFile(dataFilePath, "utf-8");
-    const objectData = JSON.parse(jsonData) as TNewsResponse;
-    return objectData;
-  } catch (e: any) {
-    console.log(`${e.message}`);
-  }
-};
+// export const asyncReadNewsData = async () => {
+//   try {
+//     const cookiesJSON = jsCookie.get("news");
+//     console.log("cookiesJSON", cookiesJSON)
+//     // const jsonData = await fsPromises.readFile(dataFilePath, "utf-8");
+//     const objectData = JSON.parse(cookiesJSON || "{}") as TNewsResponse;
+//     return objectData;
+//   } catch (e: any) {
+//     console.log(`${e.message}`);
+//   }
+// };

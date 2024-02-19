@@ -8,18 +8,17 @@ import path from "path";
 import { TNewsItem } from "../types";
 import { getNewsData } from "../utils/getNews";
 
-const dataFilePath = path.join(process.cwd(), CONFIG.DATA.NEWS_DB_PATH);
-
 async function getResponse(
   req: NextRequest,
   newsData: TNewsItem[] | undefined
 ): Promise<NextResponse> {
-
   const searchParams = req.nextUrl.searchParams;
   const id: any = searchParams.get("id");
   const idAsNumber = parseInt(id);
 
-  const selectedData = newsData?.[idAsNumber];  
+  console.log("revalidatedData", newsData?.[1].title);
+
+  const selectedData = newsData?.[idAsNumber];
 
   const nextId = idAsNumber + 1;
 
