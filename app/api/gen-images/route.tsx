@@ -11,6 +11,9 @@ async function getResponse(req: NextRequest) {
   try {
     const revalidatedData = await asyncReadNewsData();
 
+    console.log("revalidatedData", revalidatedData);
+    
+
     //  get searchParams
     const searchParams = req.nextUrl.searchParams;
     const id: any = searchParams.get("id");

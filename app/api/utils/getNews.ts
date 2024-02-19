@@ -2,8 +2,15 @@ import { CONFIG } from "@/app/config";
 import { TNewsResponse } from "../types";
 import fsPromises from "fs/promises";
 import path from "path";
+import getConfig from "next/config";
 
-export const dataFilePath = path.join(process.cwd(), CONFIG.DATA.NEWS_DB_PATH);
+const { serverRuntimeConfig } = getConfig();
+
+
+export const dataFilePath = path.join(
+  serverRuntimeConfig.PROJECT_ROOT,
+  CONFIG.DATA.NEWS_DB_PATH
+);
 
 export const getNewsData = async () => {
   // Fetch data from external API
