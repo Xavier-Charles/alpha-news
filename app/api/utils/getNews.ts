@@ -1,7 +1,8 @@
 import { CONFIG } from "@/app/config";
-import { TNewsResponse } from "../types";
+import { TNewsItem, TNewsResponse } from "../types";
 // import fsPromises from "fs/promises";
 import path from "path";
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 // import jsCookie from "js-cookie";
 // import jsHttpCookie from "cookie";
 
@@ -41,6 +42,23 @@ export const getNewsData = async () => {
   return newsResponse;
 };
 
+export const getNewsItem = async (id:number) => {
+  // Fetch data from external API
+  const res = await fetch(`${CONFIG.APP.ALPHADAY_API}/items/news/${id}/`, {
+    method: "GET",
+    headers: {
+      Version: CONFIG.APP.VERSION,
+      "X-App-Id": CONFIG.APP.X_APP_ID,
+      "X-App-Secret": CONFIG.APP.X_APP_SECRET,
+    },
+    next: { revalidate: 300, tags: ["news-img", "news-text"] },
+  });
+
+  const newsItemResponse: TNewsItem = await res.json();
+
+  return newsItemResponse;
+};
+
 // export const asyncReadNewsData = async () => {
 //   try {
 //     const cookiesJSON = jsCookie.get("news");
@@ -52,3 +70,8 @@ export const getNewsData = async () => {
 //     console.log(`${e.message}`);
 //   }
 // };
+
+type Repo = {
+  name: string;
+  stargazers_count: number;
+};

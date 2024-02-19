@@ -4,7 +4,6 @@ import {
   FrameButtonMetadata,
 } from "@coinbase/onchainkit";
 import { NextRequest, NextResponse } from "next/server";
-import path from "path";
 import { TNewsItem } from "../types";
 import { getNewsData } from "../utils/getNews";
 
@@ -19,6 +18,9 @@ async function getResponse(
   console.log("revalidatedData", newsData?.[1].title);
 
   const selectedData = newsData?.[idAsNumber];
+
+  console.log("selectedData id ==>", selectedData?.id);
+  
 
   const nextId = idAsNumber + 1;
 
@@ -55,7 +57,7 @@ async function getResponse(
     getFrameHtmlResponse({
       buttons,
       image: {
-        src: `${process.env.NEXT_PUBLIC_BASE_URL}/api/gen-images?id=${id}&hash=${selectedData?.id}`,
+        src: `${process.env.NEXT_PUBLIC_BASE_URL}/api/gen-images?id=${id}&news_id=${selectedData?.id}`,
       },
       postUrl:
         idAsNumber === CONFIG.POSTS.LIMIT
