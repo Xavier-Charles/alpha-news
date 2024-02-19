@@ -1,5 +1,9 @@
 import { CONFIG } from "@/app/config";
 import { TNewsResponse } from "../types";
+import fsPromises from "fs/promises";
+import path from "path";
+
+export const dataFilePath = path.join(process.cwd(), CONFIG.DATA.NEWS_DB_PATH);
 
 export const getNewsData = async () => {
   // Fetch data from external API
@@ -15,6 +19,22 @@ export const getNewsData = async () => {
 
   const newsResponse: TNewsResponse = await res.json();
 
+  // Convert the object to a JSON string
+  const newsData = JSON.stringify(newsResponse);
+
+  // Write the updated data to the JSON file
+  await fsPromises.writeFile(dataFilePath, newsData);
+
   // Pass data to the page via props
   return newsResponse;
+};
+
+export const asyncReadNewsData = async () => {
+  try {
+    const jsonData = await fsPromises.readFile(dataFilePath, "utf-8");
+    const objectData = JSON.parse(jsonData) as TNewsResponse;
+    return objectData;
+  } catch (e: any) {
+    console.log(`${e.message}`);
+  }
 };

@@ -68,8 +68,6 @@ async function getResponse(
 export async function POST(req: NextRequest): Promise<Response> {
   const revalidatedData = await getNewsData();
 
-  console.log(revalidatedData);
-
   return getResponse(req, revalidatedData.results);
 }
 

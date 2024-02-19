@@ -1,7 +1,7 @@
 import { ImageResponse, NextRequest } from "next/server";
 import { IMAGE_HEIGHT, IMAGE_WIDTH } from "@/app/config";
 import Card from "@/app/card";
-import { getNewsData } from "../utils/getNews";
+import { asyncReadNewsData, getNewsData } from "../utils/getNews";
 
 const roboto = fetch(
   `${process.env.NEXT_PUBLIC_BASE_URL}/fonts/Roboto-Medium.ttf`
@@ -9,22 +9,22 @@ const roboto = fetch(
 
 async function getResponse(req: NextRequest) {
   try {
-    const revalidatedData = await getNewsData();
+    const revalidatedData = await asyncReadNewsData();
 
     //  get searchParams
     const searchParams = req.nextUrl.searchParams;
     const id: any = searchParams.get("id");
     const idAsNumber = parseInt(id);
 
-    const selectedData = revalidatedData.results[idAsNumber];
+    const selectedData = revalidatedData?.results[idAsNumber];
 
     return new ImageResponse(
       (
         <Card
           id={idAsNumber}
-          title={selectedData.title}
-          sourceName={selectedData.source.name}
-          sourceIcon={selectedData.source.icon}
+          title={selectedData?.title|| ""}
+          sourceName={selectedData?.source.name || ""}
+          sourceIcon={selectedData?.source.icon || ""}
           width={IMAGE_WIDTH}
           height={IMAGE_HEIGHT}
         />
